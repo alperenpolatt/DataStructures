@@ -20,7 +20,8 @@ System.Console.WriteLine("\ninOrder:   ");
 bst.inOrder(bst.root);
 System.Console.WriteLine("\npostOrder:   ");
 bst.postOrder(bst.root);
-
+System.Console.WriteLine("\nlevelOrder:   ");
+bst.levelOrder(bst.root);
 System.Console.WriteLine("\neleman sayısı:   "+bst.size(bst.root));
 System.Console.WriteLine("Yükseklik:   "+bst.height(bst.root));
 class Node{
@@ -41,7 +42,6 @@ class Tree{
         return root;
     }
     public Node insert(Node root,int data){
-        Node eleman = new Node(data);
         if (root!=null)
         {
             if(data<root.data)
@@ -78,7 +78,27 @@ class Tree{
             postOrder(root.right);
             System.Console.Write(root.data+"    ");
         }
-
+    }
+      public void levelOrder(Node root){//sonda köke uğra
+        if (root==null)
+       {
+        return;
+       }
+       var q =new Queue<Node>();
+       q.Enqueue(root);
+       while (q.Count!=0)
+       {
+        Node current = q.Dequeue();
+        Console.Write(current.data + "    ");
+        if (current.left!=null)
+        {
+            q.Enqueue(current.left);
+        }
+        if (current.right!=null)
+        {
+            q.Enqueue(current.right);
+        }
+       }
     }
     public int size(Node root){
         if (root ==null)
